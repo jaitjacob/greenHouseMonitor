@@ -4,26 +4,24 @@
 #check against the config.json for values outside range and send notification
 #push notification: Push bullet - 1 notification per day. - Use databse to remeber if notification sent or NOT. 
 from sense_hat import SenseHat
-import datetime
-import time
+import datetime,time,sqlite3
 from datetime import timedelta
 
 sense = SenseHat()
+conn = sqlite3.connect('sensor.db')
+cur = conn.cursor()
+
+#create the table that stores sensor values
+
+cur.execute('''CREATE TABLE sensor
+                (date text, temperature real, humidity real)''')
+
+humidity = round(sense.get_humidity(),2)
+temperature = round(sense.get_temperature(),2)
+ts = time.time()
+st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
 
-def get_humidity():
-    return humidity = round(sense.get_humidity(),2)
-
-def get_temperature():
-    return temperature = round(sense.get_temperature(),2)
-
-def get_time():
-    ts = time.time()
-    st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-    return st
-
-
-
-#print("%s" %humidity)
-#print("%s" %temperature)
-#print (st+"\n")
+print("%s" %humidity)
+print("%s" %temperature)
+print (st+"\n")
