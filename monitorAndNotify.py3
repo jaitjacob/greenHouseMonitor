@@ -25,7 +25,7 @@ def getSensorData():
     print("%s" %temperature)
     print (st+"\n")
 
- def writeIntoDB():
+def writeIntoDB():
     cur.execute("INSERT INTO sensor VALUES(?,?,?,?)",st,temperature,humidity)
 
 if __name__ == "__main__":
