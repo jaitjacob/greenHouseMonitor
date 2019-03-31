@@ -12,16 +12,23 @@ conn = sqlite3.connect('sensor.db')
 cur = conn.cursor()
 
 #create the table that stores sensor values
+def createDB():
+    if(!cur.execute('''SELECT name FROM sqlite_master WHERE type='table' AND name='sensor';''')
+    cur.execute('''CREATE TABLE sensor(date text, temperature real, humidity real);''')
 
-cur.execute('''CREATE TABLE sensor
-                (date text, temperature real, humidity real)''')
+def getSensorData():
+    humidity = round(sense.get_humidity(),2)
+    temperature = round(sense.get_temperature(),2)
+    ts = time.time()
+    st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+    print("%s" %humidity)
+    print("%s" %temperature)
+    print (st+"\n")
 
-humidity = round(sense.get_humidity(),2)
-temperature = round(sense.get_temperature(),2)
-ts = time.time()
-st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+ def writeIntoDB():
+    cur.execute("INSERT INTO sensor VALUES(?,?,?,?)",st,temperature,humidity)
 
-
-print("%s" %humidity)
-print("%s" %temperature)
-print (st+"\n")
+if __name__ == "__main__":
+    createDB()
+    getSensorData()
+    writeIntoDB()
