@@ -13,7 +13,7 @@ cur = conn.cursor()
 
 #create the table that stores sensor values
 def createDB():
-    if(!cur.execute('''SELECT name FROM sqlite_master WHERE type="table" AND name="sensor"'''))
+    if(!cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='sensor'"))
     cur.execute('''CREATE TABLE sensor(date text, temperature real, humidity real);''')
 
 def getSensorData():
