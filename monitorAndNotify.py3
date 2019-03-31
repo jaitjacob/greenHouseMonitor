@@ -27,5 +27,5 @@ def getSensorData():
     cur.execute("INSERT INTO sensor VALUES(?,?,?,?)",st,temperature,humidity)
 
 if __name__ == "__main__":
-    createDB()
+    #createDB()
     getSensorData()
