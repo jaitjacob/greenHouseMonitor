@@ -11,27 +11,33 @@ import datetime,time,sqlite3
 from datetime import timedelta
 
 sense = SenseHat()
-conn = sqlite3.connect('sensor.db')
-cur = conn.cursor()
 
+class monitor:
 #create the table that stores sensor values
-def createDB():
-    #if not (cur.execute('SELECT name FROM sqlite_master WHERE type='table' AND name='sensor'')):
-    cur.execute('''CREATE TABLE sensor(date datetime, temperature real, humidity real);''')
+    def createDB(self):
+        conn = sqlite3.connect('sensor.db')
+        cur = conn.cursor()
+        #if not (cur.execute('SELECT name FROM sqlite_master WHERE type='table' AND name='sensor'')):
+        cur.execute('''CREATE TABLE sensor(date datetime, temperature real, humidity real);''')
 
-def getSensorData():
-    humidity = round(sense.get_humidity(),2)
-    temperature = round(sense.get_temperature(),2)
-    ts = time.time()
-    st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-    print("%s" %humidity)
-    print("%s" %temperature)
-    print (st+"\n")
-    cur.execute("INSERT INTO sensor values(datetime('now'), (?),(?))", (temperature,humidity,))
-    conn.commit()
-    conn.close()
+    def getSensorData(self):
+        conn = sqlite3.connect('sensor.db')
+        cur = conn.cursor()
+        humidity = round(sense.get_humidity(),2)
+        temperature = round(sense.get_temperature(),2)
+        ts = time.time()
+        st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+        print("%s" %humidity)
+        print("%s" %temperature)
+        print (st+"\n")
+        cur.execute("INSERT INTO sensor values(datetime('now'), (?),(?))", (temperature,humidity,))
+        conn.commit()
+        conn.close()
     #cur.execute('INSERT INTO sensor VALUES(?,?,?)',st,temperature,humidity)
 
 if __name__ == "__main__":
     #createDB()
-    getSensorData()
+    ##getSensorData()
+    monitorObj = monitor()
+    monitorObj.createDB()
+    monitorObj.getSensorData()
