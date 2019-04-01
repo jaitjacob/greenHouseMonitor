@@ -21,7 +21,7 @@ class pushNotify:
         else:
             print("executing push notification code")
 
-    def send_notification_via_pushbullet(title, body):
+    def send_notification_via_pushbullet(self, title, body):
         ACCESS_TOKEN = "o.Uku0RMLmpUV18bnGkAgkpYQB2mGzyAko"
         """ Sending notification via pushbullet.
             Args:
@@ -38,12 +38,8 @@ class pushNotify:
 
         print("Notification sent.")
 
-# Main function.
-def main():
-    ip_address = os.popen("hostname -I").read()
-    send_notification_via_pushbullet(ip_address, "From Raspberry Pi")
-
-
 # Execute.
 if __name__ == "__main__":
-    main()
+    pushNotifyObj = pushNotify()
+    pushNotifyObj.createDB()
+    pushNotifyObj.checkIfNotifiedToday()
