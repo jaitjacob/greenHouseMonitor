@@ -39,5 +39,5 @@ if __name__ == "__main__":
     #createDB()
     ##getSensorData()
     monitorObj = monitor()
-    monitorObj.createDB()
+    #monitorObj.createDB()
     monitorObj.getSensorData()
