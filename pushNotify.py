@@ -17,6 +17,7 @@ class pushNotify:
         print(recentDate)
         now = datetime.now()
         now = now.strftime(DATE_FORMAT)
+        print(now)
         if(recentDate == now):
             print("notification already sent for the day")
         else:
