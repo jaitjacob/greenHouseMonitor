@@ -12,7 +12,7 @@ class pushNotify:
         DATE_FORMAT = "%Y-%m-%d"
         conn = sqlite3.connect('sensor.db')
         cur = conn.cursor()
-        row = cur.execute("SELECT DATE(MAX(notifieddates)) FROM sensor").fetchone()
+        row = cur.execute("SELECT DATE(MAX(notifieddates)) FROM notified").fetchone()
         recentDate = datetime.strptime(row[0], DATE_FORMAT)
         now = datetime.now()
         now = now.strftime(DATE_FORMAT)
