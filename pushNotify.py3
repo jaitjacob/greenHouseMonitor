@@ -42,4 +42,4 @@ class pushNotify:
 if __name__ == "__main__":
     pushNotifyObj = pushNotify()
     pushNotifyObj.createDB()
-    pushNotifyObj.checkIfNotifiedToday()
+    #pushNotifyObj.checkIfNotifiedToday()
