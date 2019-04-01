@@ -20,8 +20,8 @@ def main():
         date = startDate
         while date <= endDate:
             row = cursor.execute(
-                """SELECT COUNT(*) FROM sensehat_data
-                WHERE timestamp >= DATE(:date) AND timestamp < DATE(:date, '+1 day')""",
+                """SELECT COUNT(*) FROM sensor
+                WHERE date >= DATE(:date) AND date < DATE(:date, '+1 day')""",
                 { "date": date.strftime(DATE_FORMAT) }).fetchone()
             
             print(date.strftime(DATE_FORMAT) + " | Row Count: " + str(row[0]))
