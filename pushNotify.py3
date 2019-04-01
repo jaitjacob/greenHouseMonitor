@@ -1,27 +1,25 @@
 #!/usr/bin/env python3
-import requests
-import json
-import os
+import requests,json,os,sqlite3
 from datetime import datetime, timedelta
 
 class pushNotify:
-    def createDB():
+    def createDB(self):
         conn = sqlite3.connect('sensor.db')
         cur = conn.cursor()
         cur.execute('''CREATE TABLE notified(notifieddates datetime);''')
 
-    def checkIfNotifiedToday():
+    def checkIfNotifiedToday(self):
         DATE_FORMAT = "%Y-%m-%d"
         conn = sqlite3.connect('sensor.db')
         cur = conn.cursor()
-        row = cursor.execute("SELECT DATE(MAX(notifieddates)) FROM sensor").fetchone()
+        row = cur.execute("SELECT DATE(MAX(notifieddates)) FROM sensor").fetchone()
         recentDate = datetime.strptime(row[0], DATE_FORMAT)
         now = datetime.now()
         now = now.strftime(DATE_FORMAT)
         if(recentDate == now):
             print("notification already sent for the day")
         else:
-            print("executing push notification code.")
+            print("executing push notification code")
 
     def send_notification_via_pushbullet(title, body):
         ACCESS_TOKEN = "o.Uku0RMLmpUV18bnGkAgkpYQB2mGzyAko"
