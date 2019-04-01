@@ -3,7 +3,7 @@ import requests
 import json
 import os
 
-ACCESS_TOKEN = "zzz"
+ACCESS_TOKEN = "zasazz"
 
 def send_notification_via_pushbullet(title, body):
     """ Sending notification via pushbullet.
