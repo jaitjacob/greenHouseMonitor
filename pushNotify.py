@@ -17,4 +17,4 @@ def send_notification_via_pushbullet(self, title, body):
 
         print("Notification sent.")
 
-send_notification_via_pushbullet(self,"this title","ENDGAME is coming")
+send_notification_via_pushbullet("this title","ENDGAME is coming")
