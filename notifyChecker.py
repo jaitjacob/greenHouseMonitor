@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import requests,json,os,sqlite3
 from datetime import datetime, timedelta
+import pushNotify, configFetcher
 
 class pushNotify:
     def createDB(self):
@@ -19,11 +20,9 @@ class pushNotify:
         now = now.strftime(DATE_FORMAT)
 
         if(recentDate == now):
-            print("notification already sent for the day")
+            return 0
         else:
-            print("executing push notification code")
-
-    def configCheck(self):
+            return 1
         
 
 # Execute.
