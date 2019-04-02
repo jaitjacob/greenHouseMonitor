@@ -1,30 +1,6 @@
-#!/usr/bin/env python3
 import requests,json,os,sqlite3
-from datetime import datetime, timedelta
 
-class pushNotify:
-    def createDB(self):
-        conn = sqlite3.connect('sensor.db')
-        cur = conn.cursor()
-        cur.execute('''CREATE TABLE notified(notifieddates datetime);''')
-
-    def checkIfNotifiedToday(self):
-        DATE_FORMAT = "%Y-%m-%d"
-        conn = sqlite3.connect('sensor.db')
-        cur = conn.cursor()
-        row = cur.execute("SELECT DATE(MAX(notifieddates)) FROM notified").fetchone()
-        recentDate = datetime.strptime(row[0], DATE_FORMAT)
-        recentDate = recentDate.strftime(DATE_FORMAT)
-        print(recentDate)
-        now = datetime.now()
-        now = now.strftime(DATE_FORMAT)
-        print(now)
-        if(recentDate == now):
-            print("notification already sent for the day")
-        else:
-            print("executing push notification code")
-
-    def send_notification_via_pushbullet(self, title, body):
+def send_notification_via_pushbullet(self, title, body):
         ACCESS_TOKEN = "o.Uku0RMLmpUV18bnGkAgkpYQB2mGzyAko"
         """ Sending notification via pushbullet.
             Args:
@@ -41,8 +17,4 @@ class pushNotify:
 
         print("Notification sent.")
 
-# Execute.
-if __name__ == "__main__":
-    pushNotifyObj = pushNotify()
-    #pushNotifyObj.createDB()
-    pushNotifyObj.checkIfNotifiedToday()
+send_notification_via_pushbullet(self,"this title","ENDGAME is coming")
