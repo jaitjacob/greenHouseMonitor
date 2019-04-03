@@ -29,4 +29,4 @@ class Alerter:
 # Execute program.
 if __name__ == "__main__":
     maxTemp = Alerter()
-    maxTemp
+    maxTemp.getMaxTempToday()
