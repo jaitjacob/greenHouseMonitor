@@ -23,6 +23,12 @@ class pushNotify:
             return 0
         else:
             return 1
+
+    def pushNotify(self):
+        if(self.checkIfNotifiedToday()):
+            #send notification
+        else:
+            pass
         
 
 # Execute.
