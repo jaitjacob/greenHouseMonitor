@@ -30,7 +30,7 @@ class monitor:
         print("%s" %humidity)
         print("%s" %temperature)
         print (st+"\n")
-        cur.execute("INSERT INTO sensor values(datetime('now'), (?),(?))", (temperature,humidity,))
+        cur.execute("INSERT INTO sensor values(datetime('now','localtime'), (?),(?))", (temperature,humidity,))
         conn.commit()
         conn.close()
 
