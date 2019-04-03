@@ -7,7 +7,7 @@ ONE_DAY_DELTA = timedelta(days = 1)
 
 class Alerter:
 
-    def getMaxTempToday():
+    def getMaxTempToday(self):
         connection = sqlite3.connect(DB_NAME)
         connection.row_factory = sqlite3.Row
         with connection:
