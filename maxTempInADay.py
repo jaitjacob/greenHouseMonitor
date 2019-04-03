@@ -20,10 +20,8 @@ class Alerter:
     #while date <= endDate:
             row = cursor.execute(
                  """SELECT MAX(temperature) FROM sensor
-                    WHERE date >= DATE('now')""",
-                    { "date": date.strftime(DATE_FORMAT) }).fetchone()            
-            print(date.strftime(DATE_FORMAT) + " | Row Count: " + str(row[0]))        
-            date += ONE_DAY_DELTA
+                    WHERE date >= DATE('now')""").fetchone()            
+            print(" | Row Count: " + str(row[0]))        
         connection.close()
 
 
