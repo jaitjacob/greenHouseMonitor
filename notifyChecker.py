@@ -35,5 +35,6 @@ def checkIfNotifiedToday(self):
 def insertNotifiedDate(self):
     conn = sqlite3.connect('sensor.db')
     cur = conn.cursor()
+    print("inserting todays date into notified dates")
     cur.execute('''INSERT INTO notified VALUES(DATE('now'))''')
     conn.close()

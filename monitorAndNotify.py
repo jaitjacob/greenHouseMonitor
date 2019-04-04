@@ -76,7 +76,7 @@ class monitor:
         st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
         print (st+"\n")
         
-        cur.execute("INSERT INTO sensor values((?),(?),(?))", (currentTemp,currentHum,st))
+        cur.execute("INSERT INTO sensor values((?),(?),(?))", (st,currentTemp,currentHum))
         conn.commit()
         conn.close()
 
