@@ -25,6 +25,7 @@ def checkIfNotifiedToday(self):
     recentDate = recentDate.strftime(DATE_FORMAT)
     now = datetime.now()
     now = now.strftime(DATE_FORMAT)
+
     conn.close()
 
     if(recentDate == now):
@@ -37,4 +38,5 @@ def insertNotifiedDate(self):
     cur = conn.cursor()
     print("inserting todays date into notified dates")
     cur.execute('''INSERT INTO notified VALUES(DATE('now'))''')
+    conn.commit()
     conn.close()
