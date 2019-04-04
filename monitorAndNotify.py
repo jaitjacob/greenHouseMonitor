@@ -28,7 +28,6 @@ class monitor:
         return humidity, temperature
 
     def checkData(self, currentTemp, currentHum):
-        print("entered check data")
         #conn = sqlite3.connect('sensor.db')
         #cur = conn.cursor()
         maxTemp = configFetcher.getMaxTemperature()
@@ -38,7 +37,7 @@ class monitor:
         print(maxTemp,maxHum,minTemp,minHum)
         message = ""
         shouldNotify = 0
-
+        print("shouldNotify before: "+shouldNotify)
         if(currentTemp>maxTemp):
             message = message+"current temperature exceeds configured temperature. "
             shouldNotify = 1
@@ -55,6 +54,7 @@ class monitor:
             message = message+"current humidity is below configured humidity. "
             shouldNotify = 1
 
+        print("shouldNotify after: "+shouldNotify)
         if(shouldNotify):
             if(notifyChecker.checkIfNotifiedToday(self)):
                 print("sending push notification.")
