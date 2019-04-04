@@ -1,6 +1,6 @@
 [{
-    "min_temperature": 1,
-    "max_temperature": 1,
-    "min_humidity": 1,
-    "max_humidity": 1
+    "min_temperature": 100,
+    "max_temperature": 100,
+    "min_humidity": 100,
+    "max_humidity": 100
 }]
