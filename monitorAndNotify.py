@@ -37,7 +37,7 @@ class monitor:
         print(maxTemp,maxHum,minTemp,minHum)
         message = ""
         shouldNotify = 0
-        print("shouldNotify before: "+shouldNotify)
+        print("shouldNotify before: "+str(shouldNotify))
         if(currentTemp>maxTemp):
             message = message+"current temperature exceeds configured temperature. "
             shouldNotify = 1
@@ -54,7 +54,7 @@ class monitor:
             message = message+"current humidity is below configured humidity. "
             shouldNotify = 1
 
-        print("shouldNotify after: "+shouldNotify)
+        print("shouldNotify after: "+str(shouldNotify))
         if(shouldNotify):
             if(notifyChecker.checkIfNotifiedToday(self)):
                 print("sending push notification.")
