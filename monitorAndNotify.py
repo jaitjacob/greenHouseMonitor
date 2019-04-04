@@ -9,6 +9,7 @@
 from sense_hat import SenseHat
 import datetime,time,sqlite3,configFetcher, notifyChecker,pushNotify
 from datetime import timedelta
+import pdb
 
 sense = SenseHat()
 
