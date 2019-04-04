@@ -54,7 +54,8 @@ class monitor:
         if(currentHum<minHum):
             message = message+"current humidity is below configured humidity. "
             shouldNotify = 1
-        pdb.set_trace()
+        
+        #pdb.set_trace()
         print(message)
         
         if(shouldNotify==1):
