@@ -21,7 +21,8 @@ class Alerter:
             row = cursor.execute(
                  """SELECT MAX(temperature) FROM sensor
                     WHERE date >= DATE('now')""").fetchone()            
-            print(" | Row Count: " + str(row[0]))        
+            if(str)
+            print(str(row[0]))        
         connection.close()
 
 
