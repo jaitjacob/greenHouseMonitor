@@ -56,7 +56,7 @@ class monitor:
             shouldNotify = 1
 
         print(message)
-        
+        pdb.set_trace()
         if(shouldNotify==1):
             if(notifyChecker.checkIfNotifiedToday(self)):
                 print("sending push notification.")
