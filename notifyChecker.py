@@ -16,6 +16,10 @@ def createDB(self):
 
 
 def checkIfNotifiedToday(self):
+    """
+    
+    """
+
     DATE_FORMAT = "%Y-%m-%d"
     conn = sqlite3.connect('sensor.db')
     cur = conn.cursor()

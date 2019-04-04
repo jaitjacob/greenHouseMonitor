@@ -1,4 +1,6 @@
 import requests,json,os,sqlite3
+#Code has been shamelessly taken from one of the sample code provided during the tute.
+#All credits goes to Mathew Bolger.
 
 def send_notification_via_pushbullet(title, body):
         ACCESS_TOKEN = "o.Uku0RMLmpUV18bnGkAgkpYQB2mGzyAko"

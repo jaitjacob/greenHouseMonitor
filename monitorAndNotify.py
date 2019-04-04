@@ -14,14 +14,22 @@ import pdb
 sense = SenseHat()
 
 class monitor:
-#create the table that stores sensor values
+"""
+This is the monitor class. The objects of this class performs the core functions of the Green House Monitor which
+includes but is not limited to getting sensor values, checking them against the configuration files, calling the push
+notification function and utimately saving required data to the database.
+"""
     def createDB(self):
+        """
+        This peice of code is only ran once in the entire lifecycle of the code. Its main purpose is to create the
+        necessary table within a databse.
+        """
         conn = sqlite3.connect('sensor.db')
         cur = conn.cursor()
-        #if not (cur.execute('SELECT name FROM sqlite_master WHERE type='table' AND name='sensor'')):
         cur.execute('''CREATE TABLE sensor(date datetime, temperature real, humidity real);''')
 
     def getSensorData(self):
+        """This function read the humidity and temperature value from the Sense Hat and returns it to the caller"""
         humidity = round(sense.get_humidity(),2)
         temperature = round(sense.get_temperature(),2)
         print("%s" %humidity)
@@ -29,13 +37,18 @@ class monitor:
         return humidity, temperature
 
     def checkData(self, currentTemp, currentHum):
-        #conn = sqlite3.connect('sensor.db')
-        #cur = conn.cursor()
+        """This function fetches all the values saved in the config.json file and compares them to the current
+        temperature and humidity readings received via the SenseHat. Approporiate message is generated and a decision
+        where to send a push notification is made.
+        """
         maxTemp = configFetcher.getMaxTemperature()
         minTemp = configFetcher.getMinTemperature()
         maxHum = configFetcher.getMaxHumidity()
         minHum = configFetcher.getMaxHumidity()
-        print(maxTemp,maxHum,minTemp,minHum)
+        
+        #Config.json file values
+        #print(maxTemp,maxHum,minTemp,minHum)
+        
         message = ""
         shouldNotify = 0
     
@@ -56,6 +69,7 @@ class monitor:
             shouldNotify = 1
         
         #pdb.set_trace()
+        #The above line of code is just for debugging. Uncomment if you want it back as your breakpoint.
         print(message)
         
         if(shouldNotify==1):
@@ -69,12 +83,14 @@ class monitor:
                 self.insertDataToDB(currentTemp,currentHum)
 
     def insertDataToDB(self, currentTemp, currentHum):
+        """Data that needs to be saved to the databse is finally inserted into the tables within the sensor.db database.
+        All the data is committed and a safe connection close procedure is performed to maintain the integrity of the database.
+        """
         conn = sqlite3.connect('sensor.db')
         cur = conn.cursor()
-        
+        #when its time to insert the sensor values to the database add the timestamp as well with it.
         ts = time.time()
         st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-        print (st+"\n")
         
         cur.execute("INSERT INTO sensor values((?),(?),(?))", (st,currentTemp,currentHum))
         conn.commit()
