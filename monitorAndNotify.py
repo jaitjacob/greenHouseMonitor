@@ -28,6 +28,7 @@ class monitor:
         return humidity, temperature
 
     def checkData(self, currentTemp, currentHum):
+        print("entered check data")
         #conn = sqlite3.connect('sensor.db')
         #cur = conn.cursor()
         maxTemp = configFetcher.getMaxTemperature()
@@ -37,6 +38,7 @@ class monitor:
 
         message = ""
         shouldNotify = 0
+        
         if(currentTemp>maxTemp):
             message = message+"current temperature exceeds configured temperature. "
             shouldNotify = 1
