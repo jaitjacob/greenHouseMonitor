@@ -35,10 +35,10 @@ class monitor:
         minTemp = configFetcher.getMinTemperature()
         maxHum = configFetcher.getMaxHumidity()
         minHum = configFetcher.getMaxHumidity()
-
+        print(maxTemp,maxHum,minTemp,minHum)
         message = ""
         shouldNotify = 0
-        
+
         if(currentTemp>maxTemp):
             message = message+"current temperature exceeds configured temperature. "
             shouldNotify = 1
