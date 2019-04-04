@@ -54,9 +54,9 @@ class monitor:
         if(currentHum<minHum):
             message = message+"current humidity is below configured humidity. "
             shouldNotify = 1
-
-        print(message)
         pdb.set_trace()
+        print(message)
+        
         if(shouldNotify==1):
             if(notifyChecker.checkIfNotifiedToday(self)):
                 print("sending push notification.")
