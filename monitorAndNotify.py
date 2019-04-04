@@ -63,9 +63,9 @@ class monitor:
                 pushNotify.send_notification_via_pushbullet("GreenHouse Alert",message)
                 self.insertDataToDB(currentTemp,currentHum)
                 notifyChecker.insertNotifiedDate(self)
-        else:
-            print("Already notified for the day.")
-            self.insertDataToDB(currentTemp,currentHum)
+            else:
+                print("Already notified for the day.")
+                self.insertDataToDB(currentTemp,currentHum)
 
     def insertDataToDB(self, currentTemp, currentHum):
         conn = sqlite3.connect('sensor.db')
