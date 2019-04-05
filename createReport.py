@@ -23,6 +23,10 @@ def main():
 
         print("Dates:")
         date = startDate
+
+        with open("report.csv", "a", newline="") as csvfile:
+                writer = csv.writer(csvfile)
+
         while date <= endDate:
             row = cursor.execute(
                 """SELECT COUNT(*), max(temperature), min(temperature), max(humidity), min(humidity) FROM sensor
@@ -55,10 +59,7 @@ def main():
                 message = message+"current humidity is below configured humidity. "
 
             date += ONE_DAY_DELTA
-
-            with open("report.csv", "w", newline="") as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerow([currentDate,message])
+            writer.writerow([currentDate,message])
 
 
 
