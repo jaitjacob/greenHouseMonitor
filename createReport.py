@@ -26,7 +26,7 @@ def main():
         while date <= endDate:
             row = cursor.execute(
                 """SELECT COUNT(*), max(temperature), min(temperature), max(humidity), min(humidity) FROM sensor
-                WHERE timestamp >= DATE(:date) AND timestamp < DATE(:date, '+1 day')""",
+                WHERE date >= DATE(:date) AND date < DATE(:date, '+1 day')""",
                 { "date": date.strftime(DATE_FORMAT) }).fetchone()
             
             print(date.strftime(DATE_FORMAT) + " | Readings recorded: " + str(row[0]) + "Max Temperature: " + str(row[1]))
