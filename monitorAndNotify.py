@@ -73,7 +73,7 @@ class monitor:
         print(message)
         
         if(shouldNotify==1):
-            if(notifyChecker.checkIfNotifiedToday(self)):
+            if(notifyChecker.checkIfNotifiedToday(self)==1):
                 print("sending push notification.")
                 pushNotify.send_notification_via_pushbullet("GreenHouse Alert",message)
                 self.insertDataToDB(currentTemp,currentHum)
