@@ -17,7 +17,7 @@ def main():
     with connection:
         cursor = connection.cursor()
 
-        row = cursor.execute("SELECT DATE(MIN(date)), DATE(MAX(date)) FROM sensehat_data").fetchone()
+        row = cursor.execute("SELECT DATE(MIN(date)), DATE(MAX(date)) FROM sensor").fetchone()
         startDate = datetime.strptime(row[0], DATE_FORMAT)
         endDate = datetime.strptime(row[1], DATE_FORMAT)
 
@@ -25,7 +25,7 @@ def main():
         date = startDate
         while date <= endDate:
             row = cursor.execute(
-                """SELECT COUNT(*), max(temperature), min(temperature), max(humidity), min(humidity) FROM sensehat_data
+                """SELECT COUNT(*), max(temperature), min(temperature), max(humidity), min(humidity) FROM sensor
                 WHERE timestamp >= DATE(:date) AND timestamp < DATE(:date, '+1 day')""",
                 { "date": date.strftime(DATE_FORMAT) }).fetchone()
             
