@@ -54,19 +54,19 @@ class Reporter:
                                         WHERE date >= DATE(:date) AND date < DATE(:date, '+1 day')""",
                                         { "date": date.strftime(DATE_FORMAT) }).fetchone()
                                 
-                        print(date.strftime(DATE_FORMAT) + " | Readings recorded: " + str(row[0]) + "\nMax Temperature: " + str(row[1]) + "\nMin Temperature: " + str(row[2]) + "\nMax Humidity: " + str(row[3]) + "\nMin Humidity: " + str(row[4]) )
-                        recordedTempMax = row[1]
-                        recordedTempMin = row[2]
-                        recordedHumMax = row[3]
-                        recordedHumMin = row[4]
-                        maxTemp = configFetcher.getMaxTemperature()
-                        minTemp = configFetcher.getMinTemperature()
-                        maxHum = configFetcher.getMaxHumidity()
-                        minHum = configFetcher.getMinHumidity()
-                        currentDate=date.strftime(DATE_FORMAT)
+                                print(date.strftime(DATE_FORMAT) + " | Readings recorded: " + str(row[0]) + "\nMax Temperature: " + str(row[1]) + "\nMin Temperature: " + str(row[2]) + "\nMax Humidity: " + str(row[3]) + "\nMin Humidity: " + str(row[4]) )
+                                recordedTempMax = row[1]
+                                recordedTempMin = row[2]
+                                recordedHumMax = row[3]
+                                recordedHumMin = row[4]
+                                maxTemp = configFetcher.getMaxTemperature()
+                                minTemp = configFetcher.getMinTemperature()
+                                maxHum = configFetcher.getMaxHumidity()
+                                minHum = configFetcher.getMinHumidity()
+                                currentDate=date.strftime(DATE_FORMAT)
 
-                        self.generateReportString(recordedTempMax, recordedTempMin, recordedHumMax, recordedHumMin, maxTemp, maxHum, minTemp, minHum, currentDate)
-                        date += ONE_DAY_DELTA
+                                self.generateReportString(recordedTempMax, recordedTempMin, recordedHumMax, recordedHumMin, maxTemp, maxHum, minTemp, minHum, currentDate)
+                                date += ONE_DAY_DELTA
                 connection.close()
 
 # Execute program.
