@@ -14,11 +14,11 @@ import pdb
 sense = SenseHat()
 
 class monitor:
-"""
-This is the monitor class. The objects of this class performs the core functions of the Green House Monitor which
-includes but is not limited to getting sensor values, checking them against the configuration files, calling the push
-notification function and utimately saving required data to the database.
-"""
+    """
+    This is the monitor class. The objects of this class performs the core functions of the Green House Monitor which
+    includes but is not limited to getting sensor values, checking them against the configuration files, calling the push
+    notification function and utimately saving required data to the database.
+    """
     def createDB(self):
         """
         This peice of code is only ran once in the entire lifecycle of the code. Its main purpose is to create the

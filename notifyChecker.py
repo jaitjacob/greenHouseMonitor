@@ -27,9 +27,10 @@ def checkIfNotifiedToday(self):
         "SELECT DATE(MAX(notifieddates)) FROM notified").fetchone()
     recentDate = datetime.strptime(row[0], DATE_FORMAT)
     recentDate = recentDate.strftime(DATE_FORMAT)
+    print("recent date is")
+    print(recentDate)
     now = datetime.now()
     now = now.strftime(DATE_FORMAT)
-
     conn.close()
 
     if(recentDate == now):
