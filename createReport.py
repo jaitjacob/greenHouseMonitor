@@ -38,7 +38,7 @@ def main():
             minTemp = configFetcher.getMinTemperature()
             maxHum = configFetcher.getMaxHumidity()
             minHum = configFetcher.getMinHumidity()
-            
+            message=""
             currentDate=date.strftime(DATE_FORMAT)
 
             if(recordedTempMax>maxTemp):
