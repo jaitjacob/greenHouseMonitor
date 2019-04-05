@@ -10,8 +10,9 @@ DB_NAME = "sensor.db"
 DATE_FORMAT = "%Y-%m-%d"
 ONE_DAY_DELTA = timedelta(days = 1)
 
+class Reporter:
 
-def generateReportString():
+def generateReportString(self, recordedTempMax, recordedTempMin, recordedHumMax, recordedHumMin, maxTemp, maxHum, minTemp, minHum, currentDate):
     with open("report.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         message=""
@@ -31,8 +32,7 @@ def generateReportString():
                 percent = (recordedHumMin/minHum)*100
                 message = message+"current humidity is below configured humidity. "
 
-            date += ONE_DAY_DELTA
-            writer.writerow([currentDate,message])
+        writer.writerow([currentDate,message])
 
 def generateReport():
     connection = sqlite3.connect(DB_NAME)
@@ -62,9 +62,10 @@ def generateReport():
             minTemp = configFetcher.getMinTemperature()
             maxHum = configFetcher.getMaxHumidity()
             minHum = configFetcher.getMinHumidity()
-            
             currentDate=date.strftime(DATE_FORMAT)
 
+            self.generateReportString(recordedTempMax, recordedTempMin, recordedHumMax, recordedHumMin, maxTemp, maxHum, minTemp, minHum, currentDate)
+            date += ONE_DAY_DELTA
     connection.close()
 
 # Execute program.
