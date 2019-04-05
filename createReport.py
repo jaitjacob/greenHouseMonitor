@@ -39,7 +39,7 @@ def main():
             maxHum = configFetcher.getMaxHumidity()
             minHum = configFetcher.getMinHumidity()
             
-            message=date.strftime(DATE_FORMAT)
+            currentDate=date.strftime(DATE_FORMAT)
 
             if(recordedTempMax>maxTemp):
                 percent = (recordedTempMax/maxTemp)*100
@@ -58,7 +58,7 @@ def main():
 
             with open("report.csv", "w", newline="") as csvfile:
                 writer = csv.writer(csvfile)
-                writer.writerow(message)
+                writer.writerow([currentDate,message])
 
 
 
