@@ -31,7 +31,7 @@ def checkIfNotifiedToday(self):
     print(recentDate)
     now = datetime.now()
     now = now.strftime(DATE_FORMAT)
-    print(todays date is)
+    print("todays date is")
     print(now)
     conn.close()
 
