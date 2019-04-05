@@ -41,8 +41,8 @@ def main():
             message=""
 
             if(recordedTempMax>maxTemp):
-            percent = (recordedTempMax/maxTemp)*100
-            message = "current temperature exceeds configured temperature by." + str(percent) + "%."
+                percent = (recordedTempMax/maxTemp)*100
+                message = "current temperature exceeds configured temperature by." + str(percent) + "%."
 
             if(recordedTempMin<minTemp):
                 message = message+"current temperature is below configured temperature. "
