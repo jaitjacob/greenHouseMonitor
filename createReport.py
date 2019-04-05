@@ -24,42 +24,42 @@ def main():
         print("Dates:")
         date = startDate
 
-        with open("report.csv", "w", newline="") as csvfile:
-                writer = csv.writer(csvfile)
+    with open("report.csv", "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
 
-            while date <= endDate:
-                row = cursor.execute(
-                    """SELECT COUNT(*), max(temperature), min(temperature), max(humidity), min(humidity) FROM sensor
-                    WHERE date >= DATE(:date) AND date < DATE(:date, '+1 day')""",
-                    { "date": date.strftime(DATE_FORMAT) }).fetchone()
+        while date <= endDate:
+            row = cursor.execute(
+                """SELECT COUNT(*), max(temperature), min(temperature), max(humidity), min(humidity) FROM sensor
+                WHERE date >= DATE(:date) AND date < DATE(:date, '+1 day')""",
+                { "date": date.strftime(DATE_FORMAT) }).fetchone()
                 
-                print(date.strftime(DATE_FORMAT) + " | Readings recorded: " + str(row[0]) + "\nMax Temperature: " + str(row[1]) + "\nMin Temperature: " + str(row[2]) + "\nMax Humidity: " + str(row[3]) + "\nMin Humidity: " + str(row[4]) )
-                recordedTempMax = row[1]
-                recordedTempMin = row[2]
-                recordedHumMax = row[3]
-                recordedHumMin = row[4]
-                maxTemp = configFetcher.getMaxTemperature()
-                minTemp = configFetcher.getMinTemperature()
-                maxHum = configFetcher.getMaxHumidity()
-                minHum = configFetcher.getMinHumidity()
-                message=""
-                currentDate=date.strftime(DATE_FORMAT)
+            print(date.strftime(DATE_FORMAT) + " | Readings recorded: " + str(row[0]) + "\nMax Temperature: " + str(row[1]) + "\nMin Temperature: " + str(row[2]) + "\nMax Humidity: " + str(row[3]) + "\nMin Humidity: " + str(row[4]) )
+            recordedTempMax = row[1]
+            recordedTempMin = row[2]
+            recordedHumMax = row[3]
+            recordedHumMin = row[4]
+            maxTemp = configFetcher.getMaxTemperature()
+            minTemp = configFetcher.getMinTemperature()
+            maxHum = configFetcher.getMaxHumidity()
+            minHum = configFetcher.getMinHumidity()
+            message=""
+            currentDate=date.strftime(DATE_FORMAT)
 
-                if(recordedTempMax>maxTemp):
-                    percent = (recordedTempMax/maxTemp)*100
-                    message = " current temperature exceeds configured temperature by." + str(percent) + "%."
+            if(recordedTempMax>maxTemp):
+                percent = (recordedTempMax/maxTemp)*100
+                message = " current temperature exceeds configured temperature by." + str(percent) + "%."
 
-                if(recordedTempMin<minTemp):
-                    message = message+"current temperature is below configured temperature. "
+            if(recordedTempMin<minTemp):
+                message = message+"current temperature is below configured temperature. "
 
-                if(recordedHumMax>maxHum):
-                    message = message+"current humidity exceed configured humidity. "
+            if(recordedHumMax>maxHum):
+                message = message+"current humidity exceed configured humidity. "
 
-                if(recordedHumMin<minHum):
-                    message = message+"current humidity is below configured humidity. "
+            if(recordedHumMin<minHum):
+                message = message+"current humidity is below configured humidity. "
 
-                date += ONE_DAY_DELTA
-                writer.writerow([currentDate,message])
+            date += ONE_DAY_DELTA
+            writer.writerow([currentDate,message])
 
 
 
