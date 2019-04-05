@@ -38,11 +38,12 @@ def main():
             minTemp = configFetcher.getMinTemperature()
             maxHum = configFetcher.getMaxHumidity()
             minHum = configFetcher.getMinHumidity()
-            message=""
+            
+            message=date.strftime(DATE_FORMAT)
 
             if(recordedTempMax>maxTemp):
                 percent = (recordedTempMax/maxTemp)*100
-                message = "current temperature exceeds configured temperature by." + str(percent) + "%."
+                message = " current temperature exceeds configured temperature by." + str(percent) + "%."
 
             if(recordedTempMin<minTemp):
                 message = message+"current temperature is below configured temperature. "
@@ -54,6 +55,11 @@ def main():
                 message = message+"current humidity is below configured humidity. "
 
             date += ONE_DAY_DELTA
+
+            with open("report.csv", "w", newline="") as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(message)
+
 
 
     connection.close()
