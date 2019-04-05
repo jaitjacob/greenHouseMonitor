@@ -6,7 +6,7 @@
 import sqlite3
 from datetime import datetime, timedelta
 
-DB_NAME = "sensehat.db"
+DB_NAME = "sensor.db"
 DATE_FORMAT = "%Y-%m-%d"
 ONE_DAY_DELTA = timedelta(days = 1)
 
