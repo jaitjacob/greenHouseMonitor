@@ -29,7 +29,7 @@ def main():
                 WHERE date >= DATE(:date) AND date < DATE(:date, '+1 day')""",
                 { "date": date.strftime(DATE_FORMAT) }).fetchone()
             
-            print(date.strftime(DATE_FORMAT) + " | Readings recorded: " + str(row[0]) + "Max Temperature: " + str(row[1]))
+            print(date.strftime(DATE_FORMAT) + " | Readings recorded: " + str(row[0]) + "\nMax Temperature: " + str(row[1]) + "\nMin Temperature: " + str(row[2]) + "\nMax Humidity: " + str(row[3]) + "\nMin Humidity: " + str(row[4]) )
             
             date += ONE_DAY_DELTA
     connection.close()
