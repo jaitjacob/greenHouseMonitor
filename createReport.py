@@ -3,7 +3,7 @@
 #Status OK, or BAD based on the range.
 #Has to be executed manually.
 
-import sqlite3
+import sqlite3, configFetcher, csv
 from datetime import datetime, timedelta
 
 DB_NAME = "sensor.db"
@@ -30,8 +30,32 @@ def main():
                 { "date": date.strftime(DATE_FORMAT) }).fetchone()
             
             print(date.strftime(DATE_FORMAT) + " | Readings recorded: " + str(row[0]) + "\nMax Temperature: " + str(row[1]) + "\nMin Temperature: " + str(row[2]) + "\nMax Humidity: " + str(row[3]) + "\nMin Humidity: " + str(row[4]) )
-            
+            recordedTempMax = row[1]
+            recordedTempMin = row[2]
+            recordedHumMax = row[3]
+            recordedHumMin = row[4]
+            maxTemp = configFetcher.getMaxTemperature()
+            minTemp = configFetcher.getMinTemperature()
+            maxHum = configFetcher.getMaxHumidity()
+            minHum = configFetcher.getMinHumidity()
+            message=""
+
+            if(recordedTempMax>maxTemp):
+            percent = (recordedTempMax/maxTemp)*100
+            message = "current temperature exceeds configured temperature by." + str(percent) + "%."
+
+            if(recordedTempMin<minTemp):
+                message = message+"current temperature is below configured temperature. "
+
+            if(recordedHumMax>maxHum):
+                message = message+"current humidity exceed configured humidity. "
+
+            if(recordedHumMin<minHum):
+                message = message+"current humidity is below configured humidity. "
+
             date += ONE_DAY_DELTA
+
+
     connection.close()
 
 # Execute program.
