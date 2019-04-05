@@ -12,16 +12,10 @@ class Alerter:
         connection.row_factory = sqlite3.Row
         with connection:
             cursor = connection.cursor()
-    #row = cursor.execute("SELECT DATE(MIN(date)), DATE(MAX(date)) FROM sensor").fetchone()
-    #startDate = datetime.strptime(row[0], DATE_FORMAT)
-    #endDate = datetime.strptime(row[1], DATE_FORMAT)
-    #print("Dates:")
-    #date = startDate
-    #while date <= endDate:
             row = cursor.execute(
                  """SELECT MAX(temperature) FROM sensor
                     WHERE date >= DATE('now')""").fetchone()            
-            if(str)
+            if(str):
             print(str(row[0]))        
         connection.close()
 
