@@ -10,8 +10,31 @@ DB_NAME = "sensor.db"
 DATE_FORMAT = "%Y-%m-%d"
 ONE_DAY_DELTA = timedelta(days = 1)
 
-# Main function.
-def main():
+
+def generateReportString():
+    with open("report.csv", "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        message=""
+        if(recordedTempMax>maxTemp):
+                percent = (recordedTempMax/maxTemp)*100
+                message = " current temperature exceeds configured temperature by." + str(percent) + "%."
+
+        if(recordedTempMin<minTemp):
+                percent = (recordedTempMin/minTemp)*100
+                message = message+"current temperature is"+str(percent)+ "% below configured temperature. "
+
+        if(recordedHumMax>maxHum):
+                percent = (recordedHumMax/maxHum)*100
+                message = message+"current humidity exceed configured humidity. "
+
+        if(recordedHumMin<minHum):
+                percent = (recordedHumMin/minHum)*100
+                message = message+"current humidity is below configured humidity. "
+
+            date += ONE_DAY_DELTA
+            writer.writerow([currentDate,message])
+
+def generateReport():
     connection = sqlite3.connect(DB_NAME)
     connection.row_factory = sqlite3.Row
    
@@ -23,9 +46,6 @@ def main():
 
         print("Dates:")
         date = startDate
-
-    with open("report.csv", "w", newline="") as csvfile:
-        writer = csv.writer(csvfile)
 
         while date <= endDate:
             row = cursor.execute(
@@ -42,26 +62,8 @@ def main():
             minTemp = configFetcher.getMinTemperature()
             maxHum = configFetcher.getMaxHumidity()
             minHum = configFetcher.getMinHumidity()
-            message=""
+            
             currentDate=date.strftime(DATE_FORMAT)
-
-            if(recordedTempMax>maxTemp):
-                percent = (recordedTempMax/maxTemp)*100
-                message = " current temperature exceeds configured temperature by." + str(percent) + "%."
-
-            if(recordedTempMin<minTemp):
-                message = message+"current temperature is below configured temperature. "
-
-            if(recordedHumMax>maxHum):
-                message = message+"current humidity exceed configured humidity. "
-
-            if(recordedHumMin<minHum):
-                message = message+"current humidity is below configured humidity. "
-
-            date += ONE_DAY_DELTA
-            writer.writerow([currentDate,message])
-
-
 
     connection.close()
 
