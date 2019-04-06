@@ -10,8 +10,8 @@ class bluetoothNotify:
                 print("Found device with mac-address: " + macAddress)
 
     def sliceMacAddress(self,macAddress):
-        sliceStart = macAddress.rindex("(")
-        sliceEnd = macAddress.rindex(")")
+        sliceStart = int(macAddress.rindex("("))
+        sliceEnd = int(macAddress.rindex(")"))
         macAddress = macAddress[sliceStart+1,sliceEnd-1]
         print(macAddress)
         
