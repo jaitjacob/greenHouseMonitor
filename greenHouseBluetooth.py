@@ -17,7 +17,7 @@ class bluetoothNotify:
         print(sliceStart)
         print(sliceEnd)
 
-        macAddress = macAddress[sliceStart,sliceEnd]
+        macAddress = macAddress.split(sliceStart,sliceEnd)
         print(macAddress)
         
 #
