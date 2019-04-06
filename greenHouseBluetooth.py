@@ -17,6 +17,8 @@ class bluetoothNotify:
         (stdout, stdin) = (p.stdout, p.stdin)
         data = stdout.readlines()
         print(data)
+        myphone=data.pop(0)
+        print(myphone)
 #
 if __name__ == "__main__":
     blue = bluetoothNotify()
