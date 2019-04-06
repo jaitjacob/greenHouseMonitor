@@ -3,7 +3,6 @@ import subprocess as sp
 
 class bluetoothNotify:
     def findNearByDevices(self):
-        while True:
             print("Scanning...")
             nearbyDevices = bluetooth.discover_devices()
 
