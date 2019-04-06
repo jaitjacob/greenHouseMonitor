@@ -10,7 +10,7 @@ class bluetoothNotify:
         nearbyDevices = bluetooth.discover_devices()
 
         for macAddress in nearbyDevices:
-            if(macAdd.equals(macAddress)):
+            if(macAdd==macAddress):
                 print("match anu")
 
     def sliceMacAddress(self, macAddress):
