@@ -3,14 +3,12 @@ import subprocess as sp
 
 class bluetoothNotify:
     def findNearByDevices(self):
-        print("Scanning...")
-        nearbyDevices = bluetooth.discover_devices()
+        while time.sleep(5):
+            print("Scanning...")
+            nearbyDevices = bluetooth.discover_devices()
 
-        for macAddress in nearbyDevices:
-            print("Found device with mac-address: " + macAddress)
-
-        print("Sleeping for 10 seconds.")
-        time.sleep(10)
+            for macAddress in nearbyDevices:
+                print("Found device with mac-address: " + macAddress)
 
     def sliceMacAddress(self,macAddress):
         sliceStart = int(macAddress.rindex("("))
