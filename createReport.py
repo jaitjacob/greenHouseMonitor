@@ -19,22 +19,22 @@ class Reporter:
                         message=""
                         flag = "OK "
                         if(recordedTempMax>maxTemp):
-                                percent = abs(((recordedTempMax/maxTemp)*100)-100)
+                                percent = round(abs(((recordedTempMax/maxTemp)*100)-100))
                                 message = message+" current temperature exceeds configured temperature by " + str(percent) + "%."
                                 flag = "BAD: "
 
                         if(recordedTempMin<minTemp):
-                                percent = abs(((recordedTempMin/minTemp)*100)-100)
+                                percent = round(abs(((recordedTempMin/minTemp)*100)-100))
                                 message = message+"current temperature is"+str(percent)+ "% below configured temperature. "
                                 flag = "BAD: "
 
                         if(recordedHumMax>maxHum):
-                                percent = abs(((recordedHumMax/maxHum)*100)-100)
+                                percent = round(abs(((recordedHumMax/maxHum)*100)-100))
                                 message = message+"current humidity exceed configured humidity by " + str(percent) + "%."
                                 flag = "BAD: "
 
                         if(recordedHumMin<minHum):
-                                percent = abs(((recordedHumMin/minHum)*100)-100)
+                                percent = round(abs(((recordedHumMin/minHum)*100)-100))
                                 message = message+"current humidity is "+str(percent)+ "% below configured humidity. "
                                 flag = "BAD: "
                         return message,flag
