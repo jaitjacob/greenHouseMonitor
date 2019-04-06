@@ -9,9 +9,6 @@ class bluetoothNotify:
             for macAddress in nearbyDevices:
                 print("Found device with mac-address: " + macAddress)
 
-            print("Sleeping for 5 seconds.")
-            time.sleep(5)
-
     def listPairedDevices(self):
         p = sp.Popen(["bt-device", "--list"], stdin = sp.PIPE, stdout = sp.PIPE, close_fds = True)
         (stdout, stdin) = (p.stdout, p.stdin)
