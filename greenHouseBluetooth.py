@@ -15,7 +15,7 @@ class bluetoothNotify:
         data = stdout.readlines()
         print(data)
         myphone=data.pop(1)
-        myphone.decode()
+        myphone=myphone.decode()
         print(myphone[5])
 #
 if __name__ == "__main__":
