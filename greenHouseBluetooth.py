@@ -30,6 +30,8 @@ class bluetoothNotify:
         print(data)
         myphone=data.pop(1)
         myphone=myphone.decode()
+        print("value of myphone")
+        print(myphone)
         self.sliceMacAddress(myphone)
         
 if __name__ == "__main__":
