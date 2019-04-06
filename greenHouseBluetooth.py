@@ -12,7 +12,7 @@ class bluetoothNotify:
     def sliceMacAddress(self,macAddress):
         sliceStart = int(macAddress.rindex("("))
         sliceEnd = int(macAddress.rindex(")"))
-        macAddress = macAddress[sliceStart+1,sliceEnd-1]
+        macAddress = macAddress[(sliceStart+1),(sliceEnd-1)]
         print(macAddress)
         
 #
