@@ -17,25 +17,26 @@ class Reporter:
                         generate a string that is then passed on to the generateReport method. """
                 
                         message=""
+                        flag = "OK "
                         if(recordedTempMax>maxTemp):
                                 percent = (recordedTempMax/maxTemp)*100
                                 message = message+" current temperature exceeds configured temperature by " + str(percent) + "%."
-                                flag = "BAD "
+                                flag = "BAD: "
 
                         if(recordedTempMin<minTemp):
                                 percent = (recordedTempMin/minTemp)*100
                                 message = message+"current temperature is"+str(percent)+ "% below configured temperature. "
-                                flag = "BAD "
+                                flag = "BAD: "
 
                         if(recordedHumMax>maxHum):
                                 percent = (recordedHumMax/maxHum)*100
                                 message = message+"current humidity exceed configured humidity by " + + str(percent) + "%."
-                                flag = "BAD "
+                                flag = "BAD: "
 
                         if(recordedHumMin<minHum):
                                 percent = (recordedHumMin/minHum)*100
                                 message = message+"current humidity is "+str(percent)+ "% below configured humidity. "
-                                flag = "BAD "
+                                flag = "BAD: "
                         return message,flag
 
         
