@@ -3,26 +3,24 @@ import subprocess as sp
 
 class bluetoothNotify:
     def findNearByDevices(self):
-            print("Scanning...")
-            nearbyDevices = bluetooth.discover_devices()
+        print("Scanning...")
+        nearbyDevices = bluetooth.discover_devices()
 
-            for macAddress in nearbyDevices:
-                print("Found device with mac-address: " + macAddress)
+        for macAddress in nearbyDevices:
+            print("Found device with mac-address: " + macAddress)
+
+        print("Sleeping for 10 seconds.")
+        time.sleep(10)
 
     def sliceMacAddress(self,macAddress):
         sliceStart = int(macAddress.rindex("("))
         sliceEnd = int(macAddress.rindex(")"))
-        
-        
-        print(sliceStart)
-        print(sliceEnd)
-        
         _=""
         
         for x in range(sliceStart+1,sliceEnd):
             _=_+macAddress[x]            
 
-        print(_)       
+        return macAddress
 #
 
     
@@ -30,13 +28,12 @@ class bluetoothNotify:
         p = sp.Popen(["bt-device", "--list"], stdin = sp.PIPE, stdout = sp.PIPE, close_fds = True)
         (stdout, stdin) = (p.stdout, p.stdin)
         data = stdout.readlines()
-        print(data)
         myphone=data.pop(1)
         myphone=myphone.decode()
-        print("value of myphone")
-        print(myphone)
-        self.sliceMacAddress(myphone)
-        
+        macAddress = self.sliceMacAddress(myphone)
+        return macAddress
+
+
 if __name__ == "__main__":
     blue = bluetoothNotify()
     blue.findNearByDevices()
