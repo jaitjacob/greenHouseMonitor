@@ -5,12 +5,13 @@ import subprocess as sp
 
 
 class bluetoothNotify:
-    def findNearByDevices(self):
+    def findNearByDevices(self, macAdd):
         print("Scanning...")
         nearbyDevices = bluetooth.discover_devices()
 
         for macAddress in nearbyDevices:
-            print("Found device with mac-address: " + macAddress)
+            if(macAdd.equals(macAddress)):
+                print("match anu")
 
     def sliceMacAddress(self, macAddress):
         sliceStart = int(macAddress.rindex("("))
@@ -36,7 +37,5 @@ class bluetoothNotify:
 
 if __name__ == "__main__":
     blue = bluetoothNotify()
-    blue.findNearByDevices()
-    blue.findNearByDevices()
-    blue.findNearByDevices()
-    blue.listPairedDevices()
+    macAddress = blue.listPairedDevices()
+    blue.findNearByDevices(macAddress)
