@@ -9,6 +9,15 @@ class bluetoothNotify:
             for macAddress in nearbyDevices:
                 print("Found device with mac-address: " + macAddress)
 
+    def sliceMacAddress(self,macAddress):
+        sliceStart = macAddress.rindex("(")
+        sliceEnd = macAddress.rindex(")")
+        macAddress = macAddress[sliceStart+1,sliceEnd-1]
+        print(macAddress)
+        
+#
+
+    
     def listPairedDevices(self):
         p = sp.Popen(["bt-device", "--list"], stdin = sp.PIPE, stdout = sp.PIPE, close_fds = True)
         (stdout, stdin) = (p.stdout, p.stdin)
@@ -16,8 +25,8 @@ class bluetoothNotify:
         print(data)
         myphone=data.pop(1)
         myphone=myphone.decode()
-        print(myphone[5])
-#
+        self.sliceMacAddress(myphone)
+        
 if __name__ == "__main__":
     blue = bluetoothNotify()
     blue.findNearByDevices()
