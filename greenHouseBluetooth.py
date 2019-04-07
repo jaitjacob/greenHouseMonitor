@@ -27,7 +27,7 @@ class bluetoothNotify:
         for x in range(sliceStart+1, sliceEnd):
             _ = _+macAddress[x]
 
-        return macAddress
+        return _
 #
 
     def listPairedDevices(self):
