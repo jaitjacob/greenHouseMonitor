@@ -32,11 +32,11 @@ class bluetoothNotify:
         data = stdout.readlines()
         myphone = data.pop(1)
         myphone = myphone.decode()
-        return macAddress
+        return myphone
 
 
 if __name__ == "__main__":
     blue = bluetoothNotify()
-    macAddress = blue.listPairedDevices()
-    macAdddress = blue.sliceMacAddress(macAddress)
-    blue.findNearByDevices(macAddress)
+    myPhone = blue.listPairedDevices()
+    macAdddress = blue.sliceMacAddress(myPhone)
+    blue.findNearByDevices(macAdddress)
