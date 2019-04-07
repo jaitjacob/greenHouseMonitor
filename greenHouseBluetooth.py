@@ -6,11 +6,16 @@ import subprocess as sp
 
 class bluetoothNotify:
     def findNearByDevices(self, macAdd):
-        print("Scanning...")
-        nearbyDevices = bluetooth.discover_devices()
+        i=0
+        while(i<5):
+            print("Scanning...")
+            nearbyDevices = bluetooth.discover_devices()
 
-        for macAddress in nearbyDevices:
-             print("Found device with mac-address: " + macAddress)
+            for macAddress in nearbyDevices:
+                print("Found device with mac-address: " + macAddress)
+                if(macAddress == macAdd):
+                    print("Match anu keto")
+            i = i+1
 
 
 
