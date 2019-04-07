@@ -37,6 +37,7 @@ class bluetoothNotify:
         data = stdout.readlines()
         myphone = data.pop(1)
         myphone = myphone.decode()
+        print(myPhone)
         return myphone
 
 
