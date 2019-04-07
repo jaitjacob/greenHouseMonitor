@@ -13,6 +13,7 @@ class bluetoothNotify:
             if(macAdd==macAddress):
                 print("match anu")
 
+
     def sliceMacAddress(self, macAddress):
         sliceStart = int(macAddress.rindex("("))
         sliceEnd = int(macAddress.rindex(")"))
