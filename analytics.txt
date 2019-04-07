@@ -1,11 +1,39 @@
-What should be specifically represented in these graphs is the data we 
+What should be specifically represented in these graphs seperately is the data we 
 collected on humidity and temperature that was recorded in separate
-intervals on a daily basis. Why we came down to this final decision was...
+intervals on a daily basis on the Pi. Why we came down to this final decision was
+because the major crux of this Assignment was to collect this specific data and then
+represent it in various Python data visualisation libraries.
 
-Python supports numerous data visualisation librarbies. In the end, we 
-decided to narrow it down to selected two libraries in Plotly and Seaborn
+Python supports numerous data visualisation libraries. In the end, we 
+decided to narrow it down to two libraries in Matplotlib and Leather
 for our project. We narrowed it down to these libraries specifically because
 of easy to understand and detailed documentation (i.e. cheat sheets we found
-on the respective websites), easier learning curves to use both in coding,
+on the respective websites), an easier learning curve for both in terms of coding,
 and better visuals (i.e. easy to view and understand for other viewers
 of the graphs).
+
+For specific kind of graphs we wanted to implement to plot our data,
+we chose to represent temperature via line plot, and humidity
+via scatter plot. Why we chose these kind of graphs specifically
+was they provide more cleaner and clearer representations of
+the daily logging of temperatures and humidity respectively,
+unlike the other data visualisation graphs we had available
+to use.
+
+When we look closer at the libraries we used for this 
+Assignment, visualisation is being created in Matplotlib
+thanks to direct access to the DB data. An advantage of matplotlib is 
+that you don't require a lot of lines in coding in order to simply generate plots,
+histograms, bar charts, or other graphs. On the other hand, 
+a disadvantage of Matplotlib is that setting up the data, parameters, 
+figures, and plotting can get quite messy and tedious to 
+do every time you do or begin a new project.
+
+Visualisation is achieved on Leather via a readable and user-friendly
+API. An advantage of using this Python library is that its good for those who
+need charts generated right away with minimal fuss, without being very
+time-consuming and don't require charts of perfection. However, I suppose one
+downside we had with using Leather was that it wasn't necessarily easy to
+find online a solution to exporting the generated graph to a png file.
+
+
