@@ -13,7 +13,7 @@ class bluetoothNotify:
 
             for macAddress in nearbyDevices:
                 print("Found device with mac-address: " + macAddress)
-                if(macAddress == macAdd):
+                if(str(macAddress) == macAdd):
                     print("Match anu keto")
             i = i+1
 
