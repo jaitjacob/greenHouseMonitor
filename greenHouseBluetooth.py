@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import bluetooth
 import time
 import os
