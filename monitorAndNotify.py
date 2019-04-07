@@ -99,6 +99,6 @@ class monitor:
 
 if __name__ == "__main__":
     monitorObj = monitor()
-    currentTemp, currentHum = monitorObj.getSensorData()
+    currentHum, currentTemp = monitorObj.getSensorData()
     monitorObj.checkData(currentTemp, currentHum)
 
