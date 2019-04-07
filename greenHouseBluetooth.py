@@ -42,6 +42,8 @@ class bluetoothNotify:
 
 if __name__ == "__main__":
     blue = bluetoothNotify()
+
     myPhone = blue.listPairedDevices()
     macAdddress = blue.sliceMacAddress(myPhone)
+    print(macAdddress)
     blue.findNearByDevices(macAdddress)
