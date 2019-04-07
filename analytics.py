@@ -1,40 +1,82 @@
-import plotly.plotly as py
-# import plotly.tools as tls
-import plotly.graph_objs as go
-py.sign_in('Cliffy25', 'lrsnLBiTFOkdgH17aNIf')
-
-# Create random data with numpy
+import sqlite3
+import leather
 import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from dateutil import parser
+from matplotlib import style
 
+# Connect to SQLite datbase
+conn = sqlite3.connect('sensor.db')
+cursor = conn.cursor()
 
-# NOTE: This is procedural code, and will need to be changed into OO format.
+# This checks that we can read and print
+# the contents from the DB without any issues
+# via SQL query
+def read_from_db():
+	cursor.execute('SELECT * FROM sensor')
+	data = cursor.fetchall()
+	print(data)
+	for row in data:
+		print(row)
 
-class Main:
-	def main():
-		N = 100
-		random_x = np.linspace(0, 1, N)
-		random_y0 = np.random.randn(N)+5
-		random_y1 = np.random.randn(N)
-		random_y2 = np.random.randn(N)-5
+# This is responsible for the generation and
+# plotting of the DB data that is fetched
+# via SQL query
+def graph_data_1():
+	# SQL query to gather DB data
+	cursor.execute('SELECT * FROM sensor')
+	data = cursor.fetchall()
 
-		# Create traces
-		trace0 = go.Scatter(
-			x = random_x,
-			y = random_y0,
-			mode = 'markers',
-			name = 'markers'
-		)
+	# Get current size
+	fig_size = plt.rcParams["figure.figsize"]
 
-		trace1 = go.Scatter(
-			x = random_x,
-			y = random_y1,
-			mode = 'lines',
-			name = 'lines'
-		)
+	# Set figure width to 9 and height to 15
+	fig_size[0] = 12
+	fig_size[1] = 9
 
-		data = [trace0, trace1]
-		py.plot(data, filename='scatter-mode-3')
+	# Set font for x-axis and y-axis values
+	font = {'family' : 'normal',
+		'size' : 10}
 
-Main.main()
+	matplotlib.rc('font', **font)
+	plt.rcParams["figure.figsize"] = fig_size
+
+	# Intialize x and y variables for the graph
+	x = []
+	y = []
+
+	# Append timestamps to x-axis, and append
+	# temperatures to y-axis
+	for row in data:
+		x.append(row[0])
+		y.append(row[1])
+
+	# Generate and plot the data as a Scatter
+	# plot
+	fig = plt.figure()
+	plt.xlabel('Timestamps')
+	plt.ylabel('Temperature')
+	plt.title('Scatter plot - Temperature data')
+	plt.clf()
+	plt.scatter(x,y)
+	plt.plot(x,y)
+	plt.draw()
+	plt.show()
+	print ("Graph generated!")
+	fig.autofmt_xdate()
+
+	# Save the generated plot as a png file
+	fig.savefig('graph1.png')
+
+# Call methods
+read_from_db()
+graph_data_1()
+
+# Close connections
+cursor.close()
+conn.close()
+
 
 
