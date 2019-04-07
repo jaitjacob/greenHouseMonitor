@@ -1,27 +1,41 @@
-import bluetooth, time, os
+import bluetooth
+import time
+import os
 import subprocess as sp
 
+
 class bluetoothNotify:
-    def findNearByDevices(self):
-            print("Scanning...")
-            nearbyDevices = bluetooth.discover_devices()
+    def findNearByDevices(self, macAdd):
+        print("Scanning...")
+        nearbyDevices = bluetooth.discover_devices()
 
-            for macAddress in nearbyDevices:
-                print("Found device with mac-address: " + macAddress)
+        for macAddress in nearbyDevices:
+            if(macAdd==macAddress):
+                print("match anu")
 
-            print("Sleeping for 5 seconds.")
-            time.sleep(5)
+    def sliceMacAddress(self, macAddress):
+        sliceStart = int(macAddress.rindex("("))
+        sliceEnd = int(macAddress.rindex(")"))
+        _ = ""
+
+        for x in range(sliceStart+1, sliceEnd):
+            _ = _+macAddress[x]
+
+        return macAddress
+#
 
     def listPairedDevices(self):
-        p = sp.Popen(["bt-device", "--list"], stdin = sp.PIPE, stdout = sp.PIPE, close_fds = True)
+        p = sp.Popen(["bt-device", "--list"], stdin=sp.PIPE,
+                     stdout=sp.PIPE, close_fds=True)
         (stdout, stdin) = (p.stdout, p.stdin)
         data = stdout.readlines()
-        print(data)
-        myphone=str(data.pop(1))
-        myphone.decode()
-        print(myphone)
-#
+        myphone = data.pop(1)
+        myphone = myphone.decode()
+        macAddress = self.sliceMacAddress(myphone)
+        return macAddress
+
+
 if __name__ == "__main__":
     blue = bluetoothNotify()
-    blue.findNearByDevices()
-    blue.listPairedDevices()
+    macAddress = blue.listPairedDevices()
+    blue.findNearByDevices(macAddress)
