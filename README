@@ -1,1 +1,2 @@
 Assignment specification is relisted here in our own words. Also, other things that needs to be focused.
+-monitorAndNotify.py - This file is run every minute using CRON. Its stores the temperature and humidity into the databse.
