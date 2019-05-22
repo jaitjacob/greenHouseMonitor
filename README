@@ -1,3 +1,12 @@
 Assignment specification is relisted here in our own words. Also, other things that needs to be focused.
 -monitorAndNotify.py - This file is run every minute using CRON. Its stores the temperature and humidity into the databse.
 -config.json - Save the threshold value for temp and hum. This is read by the push notification code to decide whether to alert you.
+-analytics.py - 
+-analytics.txt -
+-configFetcher.py -
+-createReport.py -
+-greenHouseBluetooth.py -
+-notifyChecker.py -
+-pushNotify.py -
+-sensor.db -
+-showDB.py -
